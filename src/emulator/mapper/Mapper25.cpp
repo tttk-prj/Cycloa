@@ -7,6 +7,8 @@
 
 #include "Mapper25.h"
 
+#include "../spresense_port.h"
+
 Mapper25::Mapper25(VirtualMachine &vm, const NesFile *nesFile) :
     VRC4(vm, nesFile) {
 
@@ -78,7 +80,8 @@ void Mapper25::writeBankHigh(uint16_t addr, uint8_t val) {
       ackIRQ();
       break;
     default:
-      throw EmulatorException("[Mapper23] Invalid addr!! 0x") << std::hex << addr;
+      // throw EmulatorException("[Mapper23] Invalid addr!! 0x") << std::hex << addr;
+      EXCEPTION_THROW("[Mapper23] Invalid addr!! 0x%x\n", addr);
   }
 }
 
@@ -129,6 +132,7 @@ void Mapper25::writeBankLow(uint16_t addr, uint8_t val) {
       setChrBankHigh(1, val);
       break;
     default:
-      throw EmulatorException("[Mapper23] Invalid addr!! 0x") << std::hex << addr;
+      // throw EmulatorException("[Mapper23] Invalid addr!! 0x") << std::hex << addr;
+      EXCEPTION_THROW("[Mapper23] Invalid addr!! 0x%x\n", addr);
   }
 }

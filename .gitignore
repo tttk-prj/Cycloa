@@ -4,9 +4,9 @@
 /gmon.out
 *.swp
 CMakeCache.txt
-CmakeFiles
+CMakeFiles
+cycloa
 cmake_install.cmake
-Makefile
 *.nexe
 .cproject
 *.project
