@@ -1,4 +1,4 @@
-#include "exception/EmulatorException.h"
+// #include "exception/EmulatorException.h"
 #include "VirtualMachine.h"
 #include "mapper/Mapper0.h"
 #include "mapper/Mapper1.h"

@@ -27,7 +27,8 @@ SDLAudioFairy::SDLAudioFairy()
     }
   }
   if(this->deviceId_ == 0) {
-    throw EmulatorException("Cannot open audio device");
+    // throw EmulatorException("Cannot open audio device");
+    printf("!!! Cannot open audio device !!!\n");
   }
   SDL_PauseAudioDevice(this->deviceId_, 0);
 }

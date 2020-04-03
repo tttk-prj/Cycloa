@@ -4,7 +4,7 @@
 #include <sys/stat.h>
 #include <sys/types.h>
 // #include <filesystem>
-#include "exception/EmulatorException.h"
+// #include "exception/EmulatorException.h"
 #include "VirtualMachine.h"
 
 VirtualMachine::VirtualMachine(VideoFairy &videoFairy, AudioFairy &audioFairy, GamepadFairy *player1,

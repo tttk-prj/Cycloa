@@ -22,7 +22,8 @@ SDLVideoFairy::SDLVideoFairy(std::string const &windowTitle, int width, int heig
 ,renderer(nullptr)
 {
   if (SDL_CreateWindowAndRenderer(width, height, 0, &this->window, &this->renderer) < 0) {
-    throw EmulatorException("Failed to initialize window and renderer.");
+    // throw EmulatorException("Failed to initialize window and renderer.");
+    printf("!!! Failed to initialize window and renderer. !!!\n");
   }
   SDL_SetWindowTitle(this->window, windowTitle.c_str());
   SDL_RendererInfo info;

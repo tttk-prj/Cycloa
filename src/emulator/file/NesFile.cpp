@@ -2,7 +2,7 @@
 #include <fstream>
 #include <string.h>
 #include "./NesFile.h"
-#include "../exception/EmulatorException.h"
+// #include "../exception/EmulatorException.h"
 
 #include "../spresense_port.h"
 
