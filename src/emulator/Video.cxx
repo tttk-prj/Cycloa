@@ -1,13 +1,14 @@
 #include "VirtualMachine.h"
 #include <stdio.h>
 #include <string.h>
+#include <sys/time.h>
 
 #include "spresense_port.h"
 
-Video::Video(VirtualMachine &vm, VideoFairy &videoFairy) :
+Video::Video(VirtualMachine &vm, VideoFairy &fairy) :
     VM(vm),
     cartridge(NULL),
-    videoFairy(videoFairy),
+    videoFairy(fairy),
     isEven(false),
     nowY(0),
     nowX(0),
@@ -34,6 +35,12 @@ Video::Video(VirtualMachine &vm, VideoFairy &videoFairy) :
     scrollRegisterWritten(false),
     vramAddrRegisterWritten(false) {
   //ctor
+#if 0
+  printf("this->total_time:%08x\n", &this->total_time);
+  sleep(1);
+  fairy.setTimerVal(&total_time);
+  sleep(1);
+#endif
   memset(this->screenBuffer, 0x0, screenWidth * screenHeight * sizeof(uint8_t));
 }
 
@@ -42,6 +49,11 @@ Video::~Video() {
 }
 
 void Video::run(uint16_t clockDelta) {
+#if 0
+  struct timeval time1, time2;
+
+  gettimeofday(&time1, NULL);
+#endif
   this->nowX += clockDelta;
   while (this->nowX >= 341) {
     this->nowY++;
@@ -98,6 +110,11 @@ void Video::run(uint16_t clockDelta) {
       EXCEPTION_THROW("Invalid scanline : %d\n HALT...",  this->nowY);
     }
   }
+#if 0
+  gettimeofday(&time2, NULL);
+  total_time += (time2.tv_sec  - time1.tv_sec ) * 1000000L +
+                       (time2.tv_usec - time1.tv_usec);
+#endif
 }
 
 inline void Video::spriteEval() {
