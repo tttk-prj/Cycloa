@@ -25,13 +25,13 @@ public:
   {
   }
 
-  virtual ~AudioFairy() noexcept = default;
+  virtual ~AudioFairy() {};
 
   inline bool pushAudio(int16_t sound) {
     const int nowFirstIndex = firstIndex;
     const int available =
-        nowFirstIndex > lastIndex ? nowFirstIndex - lastIndex - 1 : INTERNAL_BUFFER_SIZE - (lastIndex - nowFirstIndex) -
-                                                                    1;
+        nowFirstIndex > lastIndex ? nowFirstIndex - lastIndex - 1
+                                  : INTERNAL_BUFFER_SIZE - (lastIndex - nowFirstIndex) - 1;
     if (available > 0) {
       soundBuffer[lastIndex] = sound;
       lastIndex = (lastIndex + 1) & (INTERNAL_BUFFER_SIZE - 1);
