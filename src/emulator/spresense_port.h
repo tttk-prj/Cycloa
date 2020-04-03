@@ -8,4 +8,9 @@
   while(1); \
 }while(0)
 
+struct cartridge_data {
+  uint8_t *data;
+  int size;
+};
+
 #endif  // __SPRESENSE_PORT_H__

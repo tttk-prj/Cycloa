@@ -131,9 +131,9 @@ void Cartridge::releaseIRQ() {
 }
 
 Cartridge *
-Cartridge::loadCartridge(VirtualMachine &vm, std::vector<uint8_t> data, const char * name) {
+Cartridge::loadCartridge(VirtualMachine &vm, struct cartridge_data * data, const char * name) {
   NesFile *nesFile = nullptr;
-  nesFile = new NesFile(std::move(data), name);
+  nesFile = new NesFile(data, name);
   const uint8_t mapperNo = nesFile->getMapperNo();
   switch (mapperNo) {
     case 0: //mapper 0 = no mapper

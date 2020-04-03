@@ -10,7 +10,9 @@
 #include <cstddef>
 #include <stdint.h>
 #include <stdio.h>
-#include <vector>
+// #include <vector>
+
+#include "../spresense_port.h"
 
 class NesFile {
 public:
@@ -24,7 +26,7 @@ public:
     CHR_ROM_PAGE_SIZE = 8 * 1024,
   };
 public:
-  explicit NesFile(std::vector<uint8_t> data, const char *name = "MEMORY");
+  explicit NesFile(struct cartridge_data * data, const char *name = "MEMORY");
 
   ~NesFile();
 

@@ -5,7 +5,7 @@
 
 #include "../spresense_port.h"
 
-NesFile::NesFile(std::vector<uint8_t> data, const char *name) :
+NesFile::NesFile(struct cartridge_data * data, const char *name) :
     filename(name),
     mapperNo(0),
     prgRom(nullptr),
@@ -17,8 +17,8 @@ NesFile::NesFile(std::vector<uint8_t> data, const char *name) :
     chrSize(0),
     prgPageCnt(0),
     chrPageCnt(0) {
-  const uint32_t contentSize = data.size() - NES_FORMAT_SIZE;
-  this->analyzeFile(data.data(), contentSize, &data[NES_FORMAT_SIZE]);
+  const uint32_t contentSize = data->size - NES_FORMAT_SIZE;
+  this->analyzeFile(data->data, contentSize, &data->data[NES_FORMAT_SIZE]);
 }
 
 NesFile::~NesFile() {

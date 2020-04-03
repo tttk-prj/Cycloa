@@ -7,7 +7,7 @@
  *      Author: psi
  */
 
-#include <algorithm>
+// #include <algorithm>
 
 class AudioFairy {
 private:
@@ -46,7 +46,8 @@ protected:
     const int nowLastIndex = lastIndex;
     const int available =
         firstIndex <= nowLastIndex ? nowLastIndex - firstIndex : INTERNAL_BUFFER_SIZE - (firstIndex - nowLastIndex);
-    const int copiedLength = std::min<int>(available, maxLength);
+    // const int copiedLength = std::min<int>(available, maxLength);
+    const int copiedLength = (available > maxLength) ? maxLength : available;
     if (firstIndex + copiedLength < INTERNAL_BUFFER_SIZE) {
       memcpy(buff, &soundBuffer[firstIndex], sizeof(int16_t) * copiedLength);
       firstIndex += copiedLength;

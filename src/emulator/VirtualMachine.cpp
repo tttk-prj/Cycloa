@@ -107,7 +107,7 @@ void VirtualMachine::sendReset() {
 
 namespace {
 
-std::vector<uint8_t> readAllFromFile(const char *fileName) noexcept(false) {
+struct cartridge_data * readAllFromFile(const char *fileName) {
   struct stat ss;
   stat(fileName, &ss);
   int fileSize = ss.st_size;
@@ -115,27 +115,28 @@ std::vector<uint8_t> readAllFromFile(const char *fileName) noexcept(false) {
   if (!file) {
     EXCEPTION_THROW("Error to open file %s : (%d)\n", fileName, errno);
   }
-  std::vector<uint8_t> dat;
-  dat.resize(fileSize);
-  size_t readed = fread(dat.data(), 1, fileSize, file);
+  struct cartridge_data *dat = new cartridge_data;
+  dat->data = new uint8_t[fileSize];
+  dat->size = fileSize;
+  size_t readed = fread(dat->data, 1, fileSize, file);
   if (readed < fileSize) {
     fclose(file);
     EXCEPTION_THROW("Error to read all contents from the file %s : (%d)\n", fileName, errno);
   }
   fclose(file);
-  return std::move(dat);
+  return dat;
 }
 
 }
 
 void VirtualMachine::loadCartridge(const char * filename) {
-  VirtualMachine::loadCartridge(std::move(readAllFromFile(filename)), filename);
+  VirtualMachine::loadCartridge(readAllFromFile(filename), filename);
 }
 
-void VirtualMachine::loadCartridge(std::vector<uint8_t> data, const char *name) {
+void VirtualMachine::loadCartridge(struct cartridge_data * data, const char *name) {
   if(this->cartridge) {
     delete this->cartridge;
   }
-  this->cartridge = Cartridge::loadCartridge(*this, std::move(data), name);
+  this->cartridge = Cartridge::loadCartridge(*this, data, name);
   this->video.connectCartridge(this->cartridge);
 }

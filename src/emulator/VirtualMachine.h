@@ -19,7 +19,7 @@ public:
   };
 
   static Cartridge*
-  loadCartridge(VirtualMachine &vm, std::vector<uint8_t> data, const char *name = "MEMORY");
+  loadCartridge(VirtualMachine &vm, struct cartridge_data * data, const char *name = "MEMORY");
 
 public:
   explicit Cartridge(VirtualMachine &vm, const NesFile *nesFile = 0);
@@ -597,7 +597,7 @@ public:
   void sendReset(); //from user to all subsystems.
   void loadCartridge(const char *filename);
 
-  void loadCartridge(std::vector<uint8_t> data, const char *name = "MEMORY"); //from user
+  void loadCartridge(struct cartridge_data * data, const char *name = "MEMORY"); //from user
   inline void consumeCpuClock(uint32_t clock) {
     consumeClock(clock * CPU_CLOCK_FACTOR);
   }
