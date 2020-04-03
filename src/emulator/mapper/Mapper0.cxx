@@ -1,11 +1,11 @@
 #include "Mapper0.h"
 #include <string.h>
 
-Mapper0::Mapper0(VirtualMachine &vm, const NesFile *nesFile) :
-    Cartridge(vm, nesFile),
+Mapper0::Mapper0(VirtualMachine &vm, const NesFile *nes_file) :
+    Cartridge(vm, nes_file),
 // 16KBなら、同じ内容が繰り返される
-    addrMask(nesFile->getPrgPageCnt() > 1 ? 0x7fff : 0x3fff),
-    hasChrRam(nesFile->getChrPageCnt() == 0) {
+    addrMask(nes_file->getPrgPageCnt() > 1 ? 0x7fff : 0x3fff),
+    hasChrRam(nes_file->getChrPageCnt() == 0) {
   if (hasChrRam) {
     memset(chrRam, 0, 8192);
   }

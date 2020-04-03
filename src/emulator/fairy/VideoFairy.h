@@ -23,6 +23,7 @@ public:
   virtual ~VideoFairy() {}
 
   virtual void dispatchRendering(const uint8_t (&nesBuffer)[screenHeight][screenWidth], const uint8_t paletteMask) = 0;
+  virtual void dispatchLineRendering(int line_no, const uint8_t * const linebuff, const uint8_t paletteMask){};
 };
 
 class DummyVideoFairy : public VideoFairy {
