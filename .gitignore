@@ -5,7 +5,7 @@
 *.swp
 CMakeCache.txt
 CMakeFiles
-cycloa
+cycloa_*
 cmake_install.cmake
 *.nexe
 .cproject

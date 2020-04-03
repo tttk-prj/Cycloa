@@ -7,8 +7,8 @@
 NesFile::NesFile(struct cartridge_data * data, const char *name) :
     filename(name),
     mapperNo(0),
-    prgRom(nullptr),
-    chrRom(nullptr),
+    prgRom(NULL),
+    chrRom(NULL),
     mirrorType(HORIZONTAL),
     trainerFlag(false),
     sramFlag(false),

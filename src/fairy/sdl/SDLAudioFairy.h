@@ -9,12 +9,12 @@
 #include <SDL.h>
 #include "../../emulator/fairy/AudioFairy.h"
 
-class SDLAudioFairy final : public AudioFairy {
+class SDLAudioFairy : public AudioFairy {
 private:
   SDL_AudioDeviceID deviceId_;
 public:
   SDLAudioFairy();
-  ~SDLAudioFairy() noexcept override;
+  ~SDLAudioFairy();
 
   static void callback(void *data, Uint8 *stream, int len);
 };

@@ -45,7 +45,7 @@ public:
 private:
 };
 
-class DummyGamepadFairy final : public GamepadFairy {
+class DummyGamepadFairy : public GamepadFairy {
 public:
   DummyGamepadFairy() {};
 

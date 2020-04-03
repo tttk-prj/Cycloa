@@ -8,6 +8,7 @@
  */
 
 // #include <algorithm>
+#include <string.h>
 
 class AudioFairy {
 private:
@@ -19,10 +20,10 @@ private:
   int firstIndex;
 public:
   AudioFairy()
-  :soundBuffer{}
-  ,lastIndex(0)
+  :lastIndex(0)
   ,firstIndex(0)
   {
+    memset(soundBuffer, 0, INTERNAL_BUFFER_SIZE);
   }
 
   virtual ~AudioFairy() {};

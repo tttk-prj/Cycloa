@@ -15,7 +15,7 @@ SDLGamepadFairy::SDLGamepadFairy(SDLGamepadInfo &info)
 {
 }
 
-SDLGamepadFairy::~SDLGamepadFairy() noexcept {
+SDLGamepadFairy::~SDLGamepadFairy() {
   SDL_JoystickClose(&joystick);
 }
 

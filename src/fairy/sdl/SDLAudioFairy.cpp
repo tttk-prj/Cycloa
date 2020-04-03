@@ -33,7 +33,7 @@ SDLAudioFairy::SDLAudioFairy()
   SDL_PauseAudioDevice(this->deviceId_, 0);
 }
 
-SDLAudioFairy::~SDLAudioFairy() noexcept {
+SDLAudioFairy::~SDLAudioFairy() {
   SDL_CloseAudioDevice(this->deviceId_);
 }
 

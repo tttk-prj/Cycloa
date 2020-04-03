@@ -13,11 +13,11 @@ class SDLGamepadInfo {
 
 };
 
-class SDLGamepadFairy final : public GamepadFairy {
+class SDLGamepadFairy : public GamepadFairy {
 public:
   SDLGamepadFairy(SDLGamepadInfo &info);
 
-  virtual ~SDLGamepadFairy() noexcept;
+  virtual ~SDLGamepadFairy();
 
   virtual void onVBlank();
 

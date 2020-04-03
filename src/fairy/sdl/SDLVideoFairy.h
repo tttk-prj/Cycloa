@@ -11,16 +11,16 @@
 #include "../../emulator/VirtualMachine.h"
 #include "../../emulator/fairy/VideoFairy.h"
 
-class SDLVideoFairy final : public VideoFairy {
+class SDLVideoFairy : public VideoFairy {
 public:
   explicit SDLVideoFairy(
       std::string const &windowTitle,
       int width = Video::screenWidth * 2,
       int height = Video::screenHeight * 2);
 
-  ~SDLVideoFairy() noexcept override;
+  ~SDLVideoFairy();
 
-  void dispatchRendering(const uint8_t (&nesBuffer)[screenHeight][screenWidth], uint8_t paletteMask) override;
+  void dispatchRendering(const uint8_t (&nesBuffer)[screenHeight][screenWidth], uint8_t paletteMask);
 
   int getWidth() {
     return this->width;

@@ -18,8 +18,8 @@ SDLVideoFairy::SDLVideoFairy(std::string const &windowTitle, int width, int heig
 ,nextTime(0)
 ,fpsTime(0)
 ,fpsCnt(0)
-,window(nullptr)
-,renderer(nullptr)
+,window(NULL)
+,renderer(NULL)
 {
   if (SDL_CreateWindowAndRenderer(width, height, 0, &this->window, &this->renderer) < 0) {
     // throw EmulatorException("Failed to initialize window and renderer.");
@@ -32,7 +32,7 @@ SDLVideoFairy::SDLVideoFairy(std::string const &windowTitle, int width, int heig
                                 Video::screenHeight);
 }
 
-SDLVideoFairy::~SDLVideoFairy() noexcept {
+SDLVideoFairy::~SDLVideoFairy() {
   SDL_DestroyTexture(this->tex);
   SDL_DestroyRenderer(this->renderer);
   SDL_DestroyWindow(this->window);
@@ -81,7 +81,7 @@ SDLVideoFairy::dispatchRenderingImpl(const uint8_t (&nesBuffer)[screenHeight][sc
   uint32_t *line;
   uint8_t *line8;
   int pitch;
-  SDL_LockTexture(tex, nullptr, reinterpret_cast<void **>(&line8), &pitch);
+  SDL_LockTexture(tex, NULL, reinterpret_cast<void **>(&line8), &pitch);
   for (int y = 0; y < screenHeight; y++) {
     line = reinterpret_cast<uint32_t *>(line8);
     for (int x = 0; x < screenWidth; x++) {

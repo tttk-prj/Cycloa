@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
     SDLAudioFairy audioFairy;
     SDLGamepadInfo info;
     SDLGamepadFairy player1(info);
-    VirtualMachine vm(videoFairy, audioFairy, &player1, nullptr);
+    VirtualMachine vm(videoFairy, audioFairy, &player1, NULL);
     vm.loadCartridge(argv[1]);
     vm.sendHardReset();
     while (true) {

@@ -131,7 +131,7 @@ void Cartridge::releaseIRQ() {
 
 Cartridge *
 Cartridge::loadCartridge(VirtualMachine &vm, struct cartridge_data * data, const char * name) {
-  NesFile *nesFile = nullptr;
+  NesFile *nesFile = NULL;
   nesFile = new NesFile(data, name);
   const uint8_t mapperNo = nesFile->getMapperNo();
   switch (mapperNo) {
