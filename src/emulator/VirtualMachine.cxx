@@ -61,27 +61,17 @@ void VirtualMachine::run() {
     return;
   }
 
-  PERFORMANCE_INIT();
   const int32_t cpuClockDelta = this->clockDelta / CPU_CLOCK_FACTOR;
   const int32_t videoClockDelta = this->clockDelta / VIDEO_CLOCK_FACTOR;
   this->clockDelta = 0;
 
-  PERFORMANCE_START();
   this->processor.run(cpuClockDelta);
-  PERFORMANCE_END(total_processor_time);
 
-  PERFORMANCE_START();
   this->video.run(videoClockDelta);
-  PERFORMANCE_END(total_video_time);
 
-  PERFORMANCE_START();
   this->cartridge->run(cpuClockDelta);
-  PERFORMANCE_END(total_cartridge_time);
 
-  PERFORMANCE_START();
   this->audio.run(cpuClockDelta);
-  PERFORMANCE_END(total_audio_time);
-
 }
 
 void VirtualMachine::doReport() {

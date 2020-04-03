@@ -192,6 +192,17 @@ private:
 
 class Video {
 public:
+  enum {
+    screenWidth = 256,
+    screenHeight = 240,
+    EmptyBit = 0x00,
+    BackSpriteBit = 0x40,
+    BackgroundBit = 0x80,
+    FrontSpriteBit = 0xc0,
+    SpriteLayerBit = 0x40,
+    LayerBitMask = 0xc0
+  };
+
   explicit Video(VirtualMachine &vm, VideoFairy &videoFairy);
 
   ~Video();
@@ -210,16 +221,8 @@ public:
 
   void connectCartridge(Cartridge *cartridge);
 
-  enum {
-    screenWidth = 256,
-    screenHeight = 240,
-    EmptyBit = 0x00,
-    BackSpriteBit = 0x40,
-    BackgroundBit = 0x80,
-    FrontSpriteBit = 0xc0,
-    SpriteLayerBit = 0x40,
-    LayerBitMask = 0xc0
-  };
+  void setScreenBuffer(uint8_t (*buff)[Video::screenWidth]);
+
 protected:
 private:
   enum {
@@ -236,7 +239,7 @@ private:
   uint8_t spRam[256];
   uint8_t internalVram[2048];
   uint8_t palette[9][4];
-  uint8_t screenBuffer[screenHeight][screenWidth];
+  uint8_t (*screenBuffer)[screenWidth];
 
   /* Rendering */
   struct SpriteSlot {
@@ -599,6 +602,10 @@ public:
   void loadCartridge(struct cartridge_data * data, const char *name = "MEMORY"); //from user
   inline void consumeCpuClock(uint32_t clock) {
     consumeClock(clock * CPU_CLOCK_FACTOR);
+  }
+
+  inline void setVideoScreenBuffer(uint8_t (*buf)[Video::screenWidth]) {
+    video.setScreenBuffer(buf);
   }
 
   inline uint8_t read(uint16_t addr) //from processor to subsystems.

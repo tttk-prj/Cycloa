@@ -26,7 +26,7 @@ const uint32_t VideoFairy::nesPaletteARGB[64] =
     };
 #endif
 
-#ifndef MULTI_CPU_VIDEO_RENDERER
+#if 0
 const uint16_t VideoFairy::nesPaletteRGB565[64] =
     {
         ARGB2RGB565(0x787878), ARGB2RGB565(0x2000B0), ARGB2RGB565(0x2800B8), ARGB2RGB565(0x6010A0),

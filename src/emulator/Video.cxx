@@ -36,25 +36,19 @@ Video::Video(VirtualMachine &vm, VideoFairy &fairy) :
     scrollRegisterWritten(false),
     vramAddrRegisterWritten(false) {
   //ctor
-#if 0
-  printf("this->total_time:%08x\n", &this->total_time);
-  sleep(1);
-  fairy.setTimerVal(&total_time);
-  sleep(1);
-#endif
-  memset(this->screenBuffer, 0x0, screenWidth * screenHeight * sizeof(uint8_t));
 }
 
 Video::~Video() {
   //dtor
 }
 
-void Video::run(uint16_t clockDelta) {
-#if 0
-  struct timeval time1, time2;
+void Video::setScreenBuffer(uint8_t (*buff)[Video::screenWidth])
+{
+  screenBuffer = buff;
+}
 
-  gettimeofday(&time1, NULL);
-#endif
+
+void Video::run(uint16_t clockDelta) {
   this->nowX += clockDelta;
   while (this->nowX >= 341) {
     this->nowY++;
@@ -76,12 +70,9 @@ void Video::run(uint16_t clockDelta) {
           vramAddrRegister ^= 0x800;
         }
       }
-#ifdef RENDER_BY_LINE
-      this->videoFairy.dispatchLineRendering(this->nowY-1, lineBuff, this->paletteMask);
-#endif
     } else if (this->nowY == 241) {
       //241: The PPU just idles during this scanline. Despite this, this scanline still occurs before the VBlank flag is set.
-      this->videoFairy.dispatchRendering(screenBuffer, this->paletteMask);
+      screenBuffer = (uint8_t (*)[Video::screenWidth])this->videoFairy.dispatchRendering(screenBuffer, this->paletteMask);
       this->nowOnVBnank = true;
       spriteAddr = 0;//and typically contains 00h at the begin of the VBlank periods
     } else if (this->nowY == 242) {
@@ -114,11 +105,6 @@ void Video::run(uint16_t clockDelta) {
       EXCEPTION_THROW("Invalid scanline : %d\n HALT...",  this->nowY);
     }
   }
-#if 0
-  gettimeofday(&time2, NULL);
-  total_time += (time2.tv_sec  - time1.tv_sec ) * 1000000L +
-                       (time2.tv_usec - time1.tv_usec);
-#endif
 }
 
 inline void Video::spriteEval() {
