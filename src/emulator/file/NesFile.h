@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __NESFILE_H__
+#define __NESFILE_H__
 
 /*
  * NesFile.h
@@ -89,3 +90,4 @@ private:
 
   void analyzeFile(const uint8_t *const header, const uint32_t filesize, const uint8_t *data);
 };
+#endif  // __NESFILE_H__

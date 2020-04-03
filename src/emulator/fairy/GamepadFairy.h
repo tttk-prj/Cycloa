@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef __GAMEPADFAIRY_H__
+#define __GAMEPADFAIRY_H__
 /*
  * GamepadFairy.h
  *
@@ -55,3 +55,4 @@ public:
 
   bool isPressed(uint8_t keyIdx) override { return false; };
 };
+#endif  // __GAMEPADFAIRY_H__

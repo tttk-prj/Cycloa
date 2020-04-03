@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __MAPPER4_H__
+#define __MAPPER4_H__
 /*
  * Mapper4.h
  *
@@ -60,3 +61,4 @@ private:
 
   void processIRQ();
 };
+#endif  // __MAPPER4_H__

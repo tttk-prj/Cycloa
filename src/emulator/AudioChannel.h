@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __AUDIO_CHANNEL_H__
+#define __AUDIO_CHANNEL_H__
 /*
  * AudioChannel.h
  *
@@ -209,3 +210,5 @@ public:
 
   inline void onReset();
 };
+
+#endif  // __AUDIO_CHANNEL_H__

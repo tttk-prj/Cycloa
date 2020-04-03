@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef __VIRTUALMACHINE_H__
+#define __VIRTUALMACHINE_H__
 #include <stdint.h>
 #include <string.h>
 #include "file/NesFile.h"
@@ -695,3 +695,4 @@ private:
   uint8_t irqLine;
 
 };
+#endif  // __VIRTUALMACHINE_H__

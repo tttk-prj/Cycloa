@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __MAPPER3_H__
+#define __MAPPER3_H__
 
 /*
  * Mapper3.h
@@ -36,3 +37,4 @@ private:
   const uint32_t prgHighBankAddrBase;
   uint32_t chrBankAddrBase;
 };
+#endif  // __MAPPER3_H__

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __MAPPER0_H__
+#define __MAPPER0_H__
 
 #include "../VirtualMachine.h"
 #include "../file/NesFile.h"
@@ -33,3 +34,4 @@ private:
   const bool hasChrRam;
   uint8_t chrRam[8192];
 };
+#endif  // __MAPPER0_H__

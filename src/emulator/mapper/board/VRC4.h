@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef __VRC_H__
+#define __VRC_H__
 /*
  * VRC4.h
  *
@@ -141,3 +141,4 @@ private:
   int32_t clockDeltaLeft;
   int32_t irqNextClock;
 };
+#endif  // __VRC_H__

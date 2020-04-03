@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef __AUDIOFAIRY_H__
+#define __AUDIOFAIRY_H__
 /*
  * AudioFairy.h
  *
@@ -66,3 +66,4 @@ protected:
 class DummyAudioFairy : public AudioFairy {
 
 };
+#endif  // __AUDIOFAIRY_H__

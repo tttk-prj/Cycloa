@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __MAPPER2_H__
+#define __MAPPER2_H__
 
 /*
  * Mapper2.h
@@ -39,3 +40,5 @@ private:
   uint32_t lowBankAddrBase;
   const uint32_t highBankAddrBase;
 };
+
+#endif  // __MAPPER2_H__

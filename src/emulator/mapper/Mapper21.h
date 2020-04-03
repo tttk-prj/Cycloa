@@ -1,4 +1,6 @@
-#pragma once
+#ifndef __Mapper21_H__
+#define __Mapper21_H__
+
 /*
  * Mapper21.h
  *
@@ -19,3 +21,4 @@ public:
 
   void writeBankLow(uint16_t addr, uint8_t val);
 };
+#endif  // __Mapper21_H__

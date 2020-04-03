@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MAPPER25_H__
+#define MAPPER25_H__
 /*
  * Mapper25.h
  *
@@ -20,4 +21,4 @@ public:
   void writeBankLow(uint16_t addr, uint8_t val);
 };
 
-#pragma once
+#endif  // MAPPER25_H__

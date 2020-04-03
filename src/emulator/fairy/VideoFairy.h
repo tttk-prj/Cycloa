@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef __VIDEOFAIRY_H__
+#define __VIDEOFAIRY_H__
 /*
  * VideoFairy.h
  *
@@ -30,3 +30,4 @@ public:
 
   virtual ~DummyVideoFairy() {}
 };
+#endif  // __VIDEOFAIRY_H__

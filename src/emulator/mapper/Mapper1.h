@@ -1,4 +1,5 @@
-#pragma once
+#ifndef __MAPPER1_H__
+#define __MAPPER1_H__
 
 #include "../VirtualMachine.h"
 #include "../file/NesFile.h"
@@ -52,3 +53,4 @@ private:
 
   inline void updateBank();
 };
+#endif  // __MAPPER1_H__
