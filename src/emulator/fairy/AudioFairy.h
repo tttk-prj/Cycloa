@@ -8,6 +8,7 @@
  */
 
 // #include <algorithm>
+#include <stdint.h>
 #include <string.h>
 
 class AudioFairy {

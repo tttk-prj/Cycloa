@@ -701,6 +701,9 @@ inline void Processor::onIRQ() {
 // -- よく使いそうな関数 --
 
 inline uint8_t Processor::read(uint16_t addr) {
+#ifdef NOIO_CASE
+  if (this->PC == addr) printf("PC fetch : A(0x%04x)\n", addr);
+#endif
   return VM.read(addr);
 }
 
