@@ -24,7 +24,7 @@ public:
     CHR_ROM_PAGE_SIZE = 8 * 1024,
   };
 public:
-  explicit NesFile(std::vector<uint8_t> data, const std::string &name = "MEMORY");
+  explicit NesFile(std::vector<uint8_t> data, const char *name = "MEMORY");
 
   ~NesFile();
 
@@ -73,7 +73,7 @@ public:
   }
 
 private:
-  const std::string filename;
+  const char * filename;
   uint8_t mapperNo;
   const uint8_t *prgRom;
   const uint8_t *chrRom;

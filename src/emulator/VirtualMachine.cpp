@@ -107,20 +107,20 @@ void VirtualMachine::sendReset() {
 
 namespace {
 
-std::vector<uint8_t> readAllFromFile(std::string const &fileName) noexcept(false) {
+std::vector<uint8_t> readAllFromFile(const char *fileName) noexcept(false) {
   struct stat ss;
-  stat(fileName.c_str(), &ss);
+  stat(fileName, &ss);
   int fileSize = ss.st_size;
-  FILE *const file = fopen(fileName.c_str(), "rb");
+  FILE *const file = fopen(fileName, "rb");
   if (!file) {
-    EXCEPTION_THROW("Error to open file %s : (%d)\n", fileName.c_str(), errno);
+    EXCEPTION_THROW("Error to open file %s : (%d)\n", fileName, errno);
   }
   std::vector<uint8_t> dat;
   dat.resize(fileSize);
   size_t readed = fread(dat.data(), 1, fileSize, file);
   if (readed < fileSize) {
     fclose(file);
-    EXCEPTION_THROW("Error to read all contents from the file %s : (%d)\n", fileName.c_str(), errno);
+    EXCEPTION_THROW("Error to read all contents from the file %s : (%d)\n", fileName, errno);
   }
   fclose(file);
   return std::move(dat);
@@ -128,11 +128,11 @@ std::vector<uint8_t> readAllFromFile(std::string const &fileName) noexcept(false
 
 }
 
-void VirtualMachine::loadCartridge(std::string const& filename) {
+void VirtualMachine::loadCartridge(const char * filename) {
   VirtualMachine::loadCartridge(std::move(readAllFromFile(filename)), filename);
 }
 
-void VirtualMachine::loadCartridge(std::vector<uint8_t> data, const std::string &name) {
+void VirtualMachine::loadCartridge(std::vector<uint8_t> data, const char *name) {
   if(this->cartridge) {
     delete this->cartridge;
   }

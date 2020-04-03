@@ -7,8 +7,6 @@
  *      Author: psi
  */
 
-#include <cstdio>
-#include <cstring>
 #include <algorithm>
 
 class AudioFairy {
