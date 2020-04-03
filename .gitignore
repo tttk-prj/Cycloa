@@ -14,3 +14,4 @@ cmake_install.cmake
 *.nmf
 cmake-build-*
 /external/
+*.o

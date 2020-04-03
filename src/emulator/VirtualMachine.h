@@ -670,6 +670,12 @@ public:
     }
   }
 
+  void doReport();
+  uint32_t total_processor_time;
+  uint32_t total_video_time;
+  uint32_t total_cartridge_time;
+  uint32_t total_audio_time;
+
 protected:
 private:
   enum {

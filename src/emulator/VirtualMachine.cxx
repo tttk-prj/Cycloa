@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <sys/stat.h>
 #include <sys/types.h>
+#include <sys/time.h>
 #include "VirtualMachine.h"
 
 VirtualMachine::VirtualMachine(VideoFairy &videoFairy, AudioFairy &audioFairy, GamepadFairy *player1,
@@ -18,6 +19,11 @@ VirtualMachine::VirtualMachine(VideoFairy &videoFairy, AudioFairy &audioFairy, G
     hardResetFlag(false),
     irqLine(0) {
   //ctor
+
+  total_processor_time = 0;
+  total_video_time = 0;
+  total_cartridge_time = 0;
+  total_audio_time = 0;
 }
 
 VirtualMachine::~VirtualMachine() {
@@ -55,18 +61,40 @@ void VirtualMachine::run() {
     return;
   }
 
+  PERFORMANCE_INIT();
   const int32_t cpuClockDelta = this->clockDelta / CPU_CLOCK_FACTOR;
   const int32_t videoClockDelta = this->clockDelta / VIDEO_CLOCK_FACTOR;
   this->clockDelta = 0;
 
+  PERFORMANCE_START();
   this->processor.run(cpuClockDelta);
+  PERFORMANCE_END(total_processor_time);
 
+  PERFORMANCE_START();
   this->video.run(videoClockDelta);
+  PERFORMANCE_END(total_video_time);
 
+  PERFORMANCE_START();
   this->cartridge->run(cpuClockDelta);
+  PERFORMANCE_END(total_cartridge_time);
 
+  PERFORMANCE_START();
   this->audio.run(cpuClockDelta);
+  PERFORMANCE_END(total_audio_time);
 
+}
+
+void VirtualMachine::doReport() {
+  printf(" TotalProcessor:%d, TotalVideo:%d, TotalCartridge:%d, TotalAudio:%d\n",
+          total_processor_time,
+          total_video_time,
+          total_cartridge_time,
+          total_audio_time);
+        
+  total_processor_time = 0;
+  total_video_time = 0;
+  total_cartridge_time = 0;
+  total_audio_time = 0;
 }
 
 void VirtualMachine::consumeClock(uint32_t clock) {
