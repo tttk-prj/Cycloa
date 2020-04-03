@@ -7,10 +7,10 @@ EMULATOR_CORE_OBJS = $(subst .cxx,.o,$(EMULATOR_CORE_SRCS))
 SDL_FAIRY_OBJS     = $(subst .cpp,.o,$(SDL_FAIRY_SRCS))
 NOIO_FAIRY_OBJS    = $(subst .cpp,.o,$(NOIO_FAIRY_SRCS))
 
-SDL_CXXFLAGS = $(shell sdl2-config --cflags)
+SDL_CXXFLAGS = -DORIGINAL_CYCLOA $(shell sdl2-config --cflags)
 SDL_LDFLAGS  = $(shell sdl2-config --libs)
 
-NOIO_CXXFLAGS = -DNOIO_CASE
+NOIO_CXXFLAGS = -DORIGINAL_CYCLOA -DNOIO_CASE
 NOIO_LDFLAGS  = 
 
 SDL_OBJS = $(EMULATOR_CORE_OBJS) $(SDL_FAIRY_OBJS)

@@ -20,7 +20,7 @@ public:
 
   ~SDLVideoFairy();
 
-  void dispatchRendering(const uint8_t (&nesBuffer)[screenHeight][screenWidth], uint8_t paletteMask);
+  uint8_t * dispatchRendering(const uint8_t (*nesBuffer)[screenWidth], const uint8_t paletteMask);
 
   int getWidth() {
     return this->width;
@@ -28,6 +28,11 @@ public:
 
   int getHeight() {
     return this->width;
+  }
+
+  uint8_t *getScreenBuffer()
+  {
+    return (uint8_t *)renderBuff;
   }
 
 private:
@@ -41,7 +46,10 @@ private:
   SDL_Window *window;
   SDL_Renderer *renderer;
   SDL_Texture *tex;
+
+  uint8_t renderBuff[screenHeight][screenWidth];
+
 protected:
-  void dispatchRenderingImpl(const uint8_t (&nesBuffer)[screenHeight][screenWidth], uint8_t paletteMask,
+  void dispatchRenderingImpl(const uint8_t (*nesBuffer)[screenWidth], uint8_t paletteMask,
                              SDL_Renderer *renderer, SDL_Texture *tex);
 };

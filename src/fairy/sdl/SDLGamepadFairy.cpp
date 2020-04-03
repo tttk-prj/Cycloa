@@ -59,7 +59,7 @@ void SDLGamepadFairy::onVBlank() {
   if(keyboard[SDL_SCANCODE_Z]){
     state |= GamepadFairy::MASK_A;
   }
-  if(keyboard[SDL_SCANCODE_X]){
+  if(keyboard[SDL_SCANCODE_V]){
     state |= GamepadFairy::MASK_B;
   }
   if(keyboard[SDL_SCANCODE_A]){

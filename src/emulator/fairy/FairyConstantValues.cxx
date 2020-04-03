@@ -12,7 +12,7 @@
 /**
  * 0xaarrggbb
  */
-#if 0
+#ifdef ORIGINAL_CYCLOA
 const uint32_t VideoFairy::nesPaletteARGB[64] =
     {
         0x787878, 0x2000B0, 0x2800B8, 0x6010A0, 0x982078, 0xB01030, 0xA03000, 0x784000,

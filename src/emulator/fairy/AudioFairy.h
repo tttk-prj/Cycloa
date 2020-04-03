@@ -14,8 +14,11 @@
 class AudioFairy {
 private:
   enum {
-    // INTERNAL_BUFFER_SIZE = 0x40000,
+#ifdef ORIGINAL_CYCLOA
+    INTERNAL_BUFFER_SIZE = 0x40000,
+#else
     INTERNAL_BUFFER_SIZE = 0x400,
+#endif
   };
   int16_t soundBuffer[INTERNAL_BUFFER_SIZE];
   int lastIndex;

@@ -27,6 +27,7 @@ int main(int argc, char **argv) {
     SDLGamepadInfo info;
     SDLGamepadFairy player1(info);
     VirtualMachine vm(videoFairy, audioFairy, &player1, NULL);
+    vm.setVideoScreenBuffer( (uint8_t (*)[Video::screenWidth])videoFairy.getScreenBuffer() );
     vm.loadCartridge(argv[1]);
     vm.sendHardReset();
     while (true) {

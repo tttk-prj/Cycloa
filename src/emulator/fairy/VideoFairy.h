@@ -17,7 +17,10 @@ public:
     screenWidth = 256,
     screenHeight = 240
   };
-  // static const uint32_t nesPaletteARGB[64];
+
+#ifdef ORIGINAL_CYCLOA
+  static const uint32_t nesPaletteARGB[64];
+#endif
 
   explicit VideoFairy() {}
 

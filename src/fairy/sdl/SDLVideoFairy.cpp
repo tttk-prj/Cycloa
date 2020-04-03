@@ -38,7 +38,7 @@ SDLVideoFairy::~SDLVideoFairy() {
   SDL_DestroyWindow(this->window);
 }
 
-void SDLVideoFairy::dispatchRendering(const uint8_t (&nesBuffer)[screenHeight][screenWidth], const uint8_t paletteMask) {
+uint8_t * SDLVideoFairy::dispatchRendering(const uint8_t (*nesBuffer)[screenWidth], const uint8_t paletteMask) {
   SDL_Event e;
   while (SDL_PollEvent(&e)) {
     if (e.type == SDL_QUIT) {
@@ -73,10 +73,12 @@ void SDLVideoFairy::dispatchRendering(const uint8_t (&nesBuffer)[screenHeight][s
     }
     nextTime += 100;
   }
+
+  return (uint8_t *)nesBuffer;
 }
 
 void
-SDLVideoFairy::dispatchRenderingImpl(const uint8_t (&nesBuffer)[screenHeight][screenWidth], const uint8_t paletteMask,
+SDLVideoFairy::dispatchRenderingImpl(const uint8_t (*nesBuffer)[screenWidth], const uint8_t paletteMask,
                                      SDL_Renderer *renderer, SDL_Texture *tex) {
   uint32_t *line;
   uint8_t *line8;
