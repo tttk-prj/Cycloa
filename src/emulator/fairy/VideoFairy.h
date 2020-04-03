@@ -8,7 +8,6 @@
  */
 
 #include <stdint.h>
-#include <cstddef>
 
 class VideoFairy {
 public:

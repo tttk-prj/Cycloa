@@ -7,6 +7,7 @@
  */
 
 #include <SDL.h>
+#include <string>
 #include "../../emulator/VirtualMachine.h"
 #include "../../emulator/fairy/VideoFairy.h"
 

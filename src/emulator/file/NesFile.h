@@ -7,10 +7,8 @@
  *	  Author: psi
  */
 
-#include <cstddef>
 #include <stdint.h>
 #include <stdio.h>
-// #include <vector>
 
 #include "../spresense_port.h"
 

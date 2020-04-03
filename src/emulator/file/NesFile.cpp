@@ -1,5 +1,4 @@
 
-#include <fstream>
 #include <string.h>
 #include "./NesFile.h"
 

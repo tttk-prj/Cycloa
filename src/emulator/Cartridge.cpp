@@ -7,8 +7,7 @@
 #include "mapper/Mapper21.h"
 #include "mapper/Mapper23.h"
 #include "mapper/Mapper25.h"
-#include <string>
-#include <sstream>
+#include <string.h>
 
 #include "spresense_port.h"
 
