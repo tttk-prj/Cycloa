@@ -55,21 +55,21 @@ void NesFile::analyzeFile(const uint8_t *const header, const uint32_t filesize, 
     memcpy(this->trainer, &data[fptr], TRAINER_SIZE);
     fptr += TRAINER_SIZE;
   }
-  uint8_t *prgRom = new uint8_t[this->prgSize];
+  uint8_t *prg_rom = new uint8_t[this->prgSize];
   if (fptr + this->prgSize > filesize) {
     EXCEPTION_THROW("[FIXME] Invalid file size; too short!: %s\n", filename);
   }
-  memcpy(prgRom, &data[fptr], this->prgSize);
+  memcpy(prg_rom, &data[fptr], this->prgSize);
   fptr += this->prgSize;
-  this->prgRom = prgRom;
+  this->prgRom = prg_rom;
 
-  uint8_t *chrRom = new uint8_t[this->chrSize];
+  uint8_t *chr_rom = new uint8_t[this->chrSize];
   if (fptr + this->chrSize > filesize) {
     EXCEPTION_THROW("[FIXME] Invalid file size; too short!: %s\n", filename);
   } else if (fptr + this->chrSize < filesize) {
     EXCEPTION_THROW("[FIXME] Invalid file size; too long!: %s\n", filename);
   }
-  memcpy(chrRom, &data[fptr], this->chrSize);
+  memcpy(chr_rom, &data[fptr], this->chrSize);
   fptr += this->chrSize;
-  this->chrRom = chrRom;
+  this->chrRom = chr_rom;
 }

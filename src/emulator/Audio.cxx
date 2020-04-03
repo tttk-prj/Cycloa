@@ -2,9 +2,9 @@
 
 #include "spresense_port.h"
 
-Audio::Audio(VirtualMachine &vm, AudioFairy &audioFairy) :
+Audio::Audio(VirtualMachine &vm, AudioFairy &audio_fairy) :
     VM(vm),
-    audioFairy(audioFairy),
+    audioFairy(audio_fairy),
     //---
     rectangle1(true),
     rectangle2(false),
@@ -297,8 +297,8 @@ const uint8_t AudioChannel::LengthCounterConst[32] = {
 };
 
 
-Rectangle::Rectangle(bool isFirstChannel) :
-    isFirstChannel(isFirstChannel) {
+Rectangle::Rectangle(bool is_first_channel) :
+    isFirstChannel(is_first_channel) {
 
 }
 

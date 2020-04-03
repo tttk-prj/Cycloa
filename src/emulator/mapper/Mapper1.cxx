@@ -2,11 +2,11 @@
 
 #include "../spresense_port.h"
 
-Mapper1::Mapper1(VirtualMachine &vm, const NesFile *nesFile) :
-    Cartridge(vm, nesFile),
-    is512krom(nesFile->getPrgPageCnt() == 32),
-    hasChrRam(nesFile->getChrPageCnt() == 0),
-    lastPrgBank(nesFile->getPrgPageCnt() - 1),
+Mapper1::Mapper1(VirtualMachine &vm, const NesFile *nes_file) :
+    Cartridge(vm, nes_file),
+    is512krom(nes_file->getPrgPageCnt() == 32),
+    hasChrRam(nes_file->getChrPageCnt() == 0),
+    lastPrgBank(nes_file->getPrgPageCnt() - 1),
     chrMode(0),
     prgMode(3),
 

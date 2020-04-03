@@ -7,13 +7,13 @@
 
 #include "Mapper4.h"
 
-Mapper4::Mapper4(VirtualMachine &vm, const NesFile *nesFile) :
-    Cartridge(vm, nesFile),
+Mapper4::Mapper4(VirtualMachine &vm, const NesFile *nes_file) :
+    Cartridge(vm, nes_file),
     mode(0),
     modePrg(false),
     modeChr(false),
-    haveChrRam(nesFile->getChrPageCnt() == 0),
-    lastPrgBank((nesFile->getPrgSize() / Mapper4::PRG_BANK_SIZE) - 1),
+    haveChrRam(nes_file->getChrPageCnt() == 0),
+    lastPrgBank((nes_file->getPrgSize() / Mapper4::PRG_BANK_SIZE) - 1),
     irqEnabled(false),
     irqLatchValue(0),
     irqCounter(0),

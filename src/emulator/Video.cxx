@@ -127,10 +127,10 @@ inline void Video::spriteEval() {
   for (uint16_t i = 0; i < 256; i += 4) {
     uint16_t spY = readSprite(i) + 1;
     uint16_t spYend = spY + _sprightHeight;
-    bool hit = false;
+    // bool hit = false;
     if (spY <= y && y < spYend) {//Hit!
       if (_spriteHitCnt < Video::defaultSpriteCnt) {
-        hit = true;
+        // hit = true;
         struct SpriteSlot &slot = spriteTable[_spriteHitCnt];
         slot.idx = i >> 2;
         slot.y = spY;
@@ -539,9 +539,9 @@ inline void Video::writePalette(uint16_t addr, uint8_t value) {
   }
 }
 
-void Video::connectCartridge(Cartridge *cartridge) {
-  this->cartridge = cartridge;
-  cartridge->connectInternalVram(this->internalVram);
+void Video::connectCartridge(Cartridge *cart) {
+  this->cartridge = cart;
+  cart->connectInternalVram(this->internalVram);
 }
 
 inline uint8_t Video::readSprite(uint16_t addr) const {

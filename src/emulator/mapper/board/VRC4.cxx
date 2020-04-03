@@ -7,13 +7,13 @@
 
 #include "VRC4.h"
 
-VRC4::VRC4(VirtualMachine &vm, const NesFile *nesFile) :
-    Cartridge(vm, nesFile),
-    prgMask(nesFile->getPrgPageCnt() > 8 ? 31 : 15),
-    chrMask(nesFile->getChrPageCnt() > 16 ? 0xff : 0x7f),
+VRC4::VRC4(VirtualMachine &vm, const NesFile *nes_file) :
+    Cartridge(vm, nes_file),
+    prgMask(nes_file->getPrgPageCnt() > 8 ? 31 : 15),
+    chrMask(nes_file->getChrPageCnt() > 16 ? 0xff : 0x7f),
     prgBank0(0),
     prgBank1(1),
-    lastPage((nesFile->getPrgSize() / PRG_BANK_SIZE) - 1),
+    lastPage((nes_file->getPrgSize() / PRG_BANK_SIZE) - 1),
     swapMode(false),
     irqEnabled(false),
     irqLoop(false),

@@ -9,8 +9,8 @@
 
 #include "../spresense_port.h"
 
-Mapper23::Mapper23(VirtualMachine &vm, const NesFile *nesFile) :
-    VRC4(vm, nesFile) {
+Mapper23::Mapper23(VirtualMachine &vm, const NesFile *nes_file) :
+    VRC4(vm, nes_file) {
 
 }
 

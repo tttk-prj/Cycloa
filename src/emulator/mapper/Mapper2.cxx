@@ -8,10 +8,10 @@
 #include "Mapper2.h"
 #include <string.h>
 
-Mapper2::Mapper2(VirtualMachine &vm, const NesFile *nesFile) :
-    Cartridge(vm, nesFile),
+Mapper2::Mapper2(VirtualMachine &vm, const NesFile *nes_file) :
+    Cartridge(vm, nes_file),
     lowBankAddrBase(0),
-    highBankAddrBase(NesFile::PRG_ROM_PAGE_SIZE * (nesFile->getPrgPageCnt() - 1)) {
+    highBankAddrBase(NesFile::PRG_ROM_PAGE_SIZE * (nes_file->getPrgPageCnt() - 1)) {
   memset(vram, 0, 8192);
 }
 

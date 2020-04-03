@@ -12,13 +12,13 @@
 #include "spresense_port.h"
 
 //ダミー実装
-Cartridge::Cartridge(VirtualMachine &vm, const NesFile *nesFile) :
-    nesFile(nesFile),
+Cartridge::Cartridge(VirtualMachine &vm, const NesFile *nes_file) :
+    nesFile(nes_file),
     VM(vm),
-    hasSram(nesFile->hasSram()),
-    mirrorType(nesFile->getMirrorType()),
+    hasSram(nes_file->hasSram()),
+    mirrorType(nes_file->getMirrorType()),
     internalVram(NULL) {
-  if (nesFile == NULL) {
+  if (nes_file == NULL) {
     EXCEPTION_THROW("NES FILE CAN'T BE NULL!");
   }
 }
@@ -78,14 +78,14 @@ void Cartridge::writeNameTable(uint16_t addr, uint8_t val) {
   vramMirroring[(addr >> 10) & 0x3][addr & 0x3ff] = val;
 }
 
-void Cartridge::connectInternalVram(uint8_t *internalVram) {
-  this->internalVram = internalVram;
+void Cartridge::connectInternalVram(uint8_t *vram) {
+  this->internalVram = vram;
   this->changeMirrorType(this->mirrorType);
 }
 
-void Cartridge::changeMirrorType(NesFile::MirrorType mirrorType) {
-  this->mirrorType = mirrorType;
-  switch (mirrorType) {
+void Cartridge::changeMirrorType(NesFile::MirrorType mirror_type) {
+  this->mirrorType = mirror_type;
+  switch (mirror_type) {
     case NesFile::SINGLE0:
       this->vramMirroring[0] = &internalVram[0];
       this->vramMirroring[1] = &internalVram[0];

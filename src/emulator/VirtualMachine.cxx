@@ -147,7 +147,7 @@ struct cartridge_data * readAllFromFile(const char *fileName) {
   dat->data = new uint8_t[fileSize];
   dat->size = fileSize;
   size_t readed = fread(dat->data, 1, fileSize, file);
-  if (readed < fileSize) {
+  if (readed < (size_t)fileSize) {
     fclose(file);
     EXCEPTION_THROW("Error to read all contents from the file %s : (%d)\n", fileName, errno);
   }
