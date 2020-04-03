@@ -9,7 +9,6 @@
 
 #include <stdint.h>
 #include <cstddef>
-// #include "../exception/EmulatorException.h"
 
 class VideoFairy {
 public:

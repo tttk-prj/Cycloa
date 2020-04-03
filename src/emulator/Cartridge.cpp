@@ -1,4 +1,3 @@
-// #include "exception/EmulatorException.h"
 #include "VirtualMachine.h"
 #include "mapper/Mapper0.h"
 #include "mapper/Mapper1.h"
@@ -119,7 +118,6 @@ void Cartridge::changeMirrorType(NesFile::MirrorType mirrorType) {
       this->vramMirroring[3] = &internalVram[0x400];
       break;
     default:
-      // throw EmulatorException("Invalid mirroring type!");
       EXCEPTION_THROW("Invalid mirroring type!");
   }
 }
@@ -135,41 +133,30 @@ void Cartridge::releaseIRQ() {
 Cartridge *
 Cartridge::loadCartridge(VirtualMachine &vm, std::vector<uint8_t> data, std::string const& name) {
   NesFile *nesFile = nullptr;
-  // try {
-    nesFile = new NesFile(std::move(data), name);
-    const uint8_t mapperNo = nesFile->getMapperNo();
-    switch (mapperNo) {
-      case 0: //mapper 0 = no mapper
-        return new Mapper0(vm, nesFile);
-      case 1: //mapper 1 = MMC1
-        return new Mapper1(vm, nesFile);
-      case 2: //mapper 2 = UxROM
-        return new Mapper2(vm, nesFile);
-      case 3: //mapper 3 = CNROM
-        return new Mapper3(vm, nesFile);
-      case 4: //mapper 4 = MMC3
-        return new Mapper4(vm, nesFile);
-      case 21: //mapper 21 = VRC4ac
-        return new Mapper21(vm, nesFile);
-      case 23: //mapper 23 = VRC4e
-        return new Mapper23(vm, nesFile);
-      case 25: //mapper 25 = VRC4bd
-        return new Mapper25(vm, nesFile);
-      default: {
-        const uint32_t mapperNo32 = static_cast<uint32_t>(mapperNo);
-        // throw EmulatorException("Not Supported Mapper: ") << mapperNo32 << "!";
-        EXCEPTION_THROW("Not Supported Mapper: %d !\n", mapperNo32);
-      }
+  nesFile = new NesFile(std::move(data), name);
+  const uint8_t mapperNo = nesFile->getMapperNo();
+  switch (mapperNo) {
+    case 0: //mapper 0 = no mapper
+      return new Mapper0(vm, nesFile);
+    case 1: //mapper 1 = MMC1
+      return new Mapper1(vm, nesFile);
+    case 2: //mapper 2 = UxROM
+      return new Mapper2(vm, nesFile);
+    case 3: //mapper 3 = CNROM
+      return new Mapper3(vm, nesFile);
+    case 4: //mapper 4 = MMC3
+      return new Mapper4(vm, nesFile);
+    case 21: //mapper 21 = VRC4ac
+      return new Mapper21(vm, nesFile);
+    case 23: //mapper 23 = VRC4e
+      return new Mapper23(vm, nesFile);
+    case 25: //mapper 25 = VRC4bd
+      return new Mapper25(vm, nesFile);
+    default: {
+      const uint32_t mapperNo32 = static_cast<uint32_t>(mapperNo);
+      EXCEPTION_THROW("Not Supported Mapper: %d !\n", mapperNo32);
     }
-/*
-  } catch (...) {
-    if(nesFile) {
-      delete nesFile;
-    }
-    // throw;
-    EXCEPTION_THROW(" ");
   }
-*/
 
   return NULL;
 }

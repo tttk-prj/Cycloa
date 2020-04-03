@@ -77,7 +77,6 @@ void Mapper1::writeBankHigh(uint16_t addr, uint8_t val) {
         prgBank = reg & 15;
         break;
       default:
-        // throw EmulatorException("[Mapper1] FIXME BUG!!");
         EXCEPTION_THROW("[Mapper1] FIXME BUG!!");
     }
     updateBank();
@@ -119,7 +118,6 @@ void Mapper1::writeBankLow(uint16_t addr, uint8_t val) {
         this->lowChrBank = reg & 31;
         break;
       default:
-        // throw EmulatorException("[Mapper1] FIXME BUG!!");
         EXCEPTION_THROW("[Mapper1] FIXME BUG!!");
     }
     updateBank();

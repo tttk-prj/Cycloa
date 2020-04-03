@@ -1,6 +1,5 @@
 #pragma once
 
-// #include <cstddef>
 #include <iostream>
 #include <stdint.h>
 #include <string.h>
@@ -619,7 +618,6 @@ public:
         } else if (addr == 0x4017) {
           return ioPort.readInputReg2();
         } else if (addr < 0x4018) {
-          // throw EmulatorException("[FIXME] Invalid addr: 0x") << std::hex << addr;
           EXCEPTION_THROW("[FIXME] Invalid addr: 0x%x\n", addr);
         } else {
           return cartridge->readRegisterArea(addr);
@@ -633,7 +631,6 @@ public:
       case 0xE000:
         return cartridge->readBankHigh(addr);
       default:
-        // throw EmulatorException("[FIXME] Invalid addr: 0x") << std::hex << addr;
         EXCEPTION_THROW("[FIXME] Invalid addr: 0x%x\n", addr);
     }
   }
@@ -670,7 +667,6 @@ public:
         cartridge->writeBankHigh(addr, value);
         break;
       default:
-        // throw EmulatorException("[FIXME] Invalid addr: 0x") << std::hex << addr;
         EXCEPTION_THROW("[FIXME] Invalid addr: 0x%x\n", addr);
     }
   }

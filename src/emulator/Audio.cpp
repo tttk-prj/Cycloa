@@ -68,7 +68,6 @@ void Audio::run(uint16_t clockDelta) {
           frameIRQCnt = 0;
           break;
         default:
-          // throw EmulatorException("FIXME Audio::run interrupt NTSC");
           EXCEPTION_THROW("FIXME Audio::run interrupt NTSC");
       }
     } else {
@@ -116,7 +115,6 @@ void Audio::run(uint16_t clockDelta) {
           frameIRQCnt = 0;
           break;
         default:
-          // throw EmulatorException("FIXME Audio::run interrupt PAL");
           EXCEPTION_THROW("FIXME Audio::run interrupt PAL");
       }
     }
@@ -170,7 +168,6 @@ void Audio::onVSync() {
 
 uint8_t Audio::readReg(uint16_t addr) {
   if (addr != 0x4015) {
-    // throw EmulatorException("[FIXME] Invalid addr: 0x") << std::hex << addr << "for APU.";
     EXCEPTION_THROW("[FIXME] Invalid addr: 0x%x for APU\n HALT...", addr);
   }
   // Clears the frame interrupt flag after being read (but not the DMC interrupt flag).
@@ -259,7 +256,6 @@ void Audio::writeReg(uint16_t addr, uint8_t value) {
       analyzeLowFrequentryRegister(value);
       break;
     default:
-      // throw EmulatorException("[FIXME] Invalid addr: 0x") << std::hex << addr << "for APU.";
       EXCEPTION_THROW("[FIXME] Invalid addr: 0x%x for APU\n HALT...", addr);
   }
 }

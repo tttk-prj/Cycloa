@@ -2,7 +2,6 @@
 #include <fstream>
 #include <string.h>
 #include "./NesFile.h"
-// #include "../exception/EmulatorException.h"
 
 #include "../spresense_port.h"
 
@@ -34,7 +33,6 @@ NesFile::~NesFile() {
 
 void NesFile::analyzeFile(const uint8_t *const header, const uint32_t filesize, const uint8_t *data) {
   if (!(header[0] == 'N' && header[1] == 'E' && header[2] == 'S' && header[3] == 0x1a)) {
-    // throw EmulatorException("[FIXME] Invalid header: ") << filename;
     EXCEPTION_THROW("[FIXME] Invalid header: %s\n", filename.c_str());
   }
   this->prgSize = PRG_ROM_PAGE_SIZE * header[4];
@@ -53,7 +51,6 @@ void NesFile::analyzeFile(const uint8_t *const header, const uint32_t filesize, 
   uint32_t fptr = 0;
   if (this->trainerFlag) {
     if (fptr + TRAINER_SIZE > filesize) {
-      // throw EmulatorException("[FIXME] Invalid file size; too short!: ") << filename;
       EXCEPTION_THROW("[FIXME] Invalid file size; too short!: %s\n", filename.c_str());
     }
     memcpy(this->trainer, &data[fptr], TRAINER_SIZE);
@@ -61,7 +58,6 @@ void NesFile::analyzeFile(const uint8_t *const header, const uint32_t filesize, 
   }
   uint8_t *prgRom = new uint8_t[this->prgSize];
   if (fptr + this->prgSize > filesize) {
-    // throw EmulatorException("[FIXME] Invalid file size; too short!: ") << filename;
     EXCEPTION_THROW("[FIXME] Invalid file size; too short!: %s\n", filename.c_str());
   }
   memcpy(prgRom, &data[fptr], this->prgSize);
@@ -70,10 +66,8 @@ void NesFile::analyzeFile(const uint8_t *const header, const uint32_t filesize, 
 
   uint8_t *chrRom = new uint8_t[this->chrSize];
   if (fptr + this->chrSize > filesize) {
-    // throw EmulatorException("[FIXME] Invalid file size; too short!: ") << filename;
     EXCEPTION_THROW("[FIXME] Invalid file size; too short!: %s\n", filename.c_str());
   } else if (fptr + this->chrSize < filesize) {
-    // throw EmulatorException("[FIXME] Invalid file size; too long!: ") << filename;
     EXCEPTION_THROW("[FIXME] Invalid file size; too long!: %s\n", filename.c_str());
   }
   memcpy(chrRom, &data[fptr], this->chrSize);

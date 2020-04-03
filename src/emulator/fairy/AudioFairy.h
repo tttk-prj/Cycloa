@@ -7,7 +7,6 @@
  *      Author: psi
  */
 
-// #include "../exception/EmulatorException.h"
 #include <cstdio>
 #include <cstring>
 #include <algorithm>

@@ -1,4 +1,3 @@
-// #include "exception/EmulatorException.h"
 #include "VirtualMachine.h"
 #include <stdio.h>
 
@@ -659,7 +658,6 @@ void Processor::run(uint16_t clockDelta) {
     default:
       uint16_t opcodeBig = opcode;
       uint16_t opcodePC = this->PC - 1;
-      // throw EmulatorException("[FIXME] Invalid opcode: 0x") << std::hex << opcodeBig << " in 0x" << opcodePC;
       EXCEPTION_THROW("[FIXME] Invalid opcode: 0x%x in 0x%x\n", opcodeBig, opcodePC);
   }
   consumeClock(CycleTable[opcode]);
