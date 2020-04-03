@@ -14,7 +14,8 @@
 class AudioFairy {
 private:
   enum {
-    INTERNAL_BUFFER_SIZE = 0x40000,
+    // INTERNAL_BUFFER_SIZE = 0x40000,
+    INTERNAL_BUFFER_SIZE = 0x400,
   };
   int16_t soundBuffer[INTERNAL_BUFFER_SIZE];
   int lastIndex;

@@ -4,6 +4,7 @@
 #include <sys/time.h>
 
 #include "spresense_port.h"
+#include "../../../video_config.h"
 
 Video::Video(VirtualMachine &vm, VideoFairy &fairy) :
     VM(vm),
@@ -75,7 +76,9 @@ void Video::run(uint16_t clockDelta) {
           vramAddrRegister ^= 0x800;
         }
       }
+#ifdef RENDER_BY_LINE
       this->videoFairy.dispatchLineRendering(this->nowY-1, lineBuff, this->paletteMask);
+#endif
     } else if (this->nowY == 241) {
       //241: The PPU just idles during this scanline. Despite this, this scanline still occurs before the VBlank flag is set.
       this->videoFairy.dispatchRendering(screenBuffer, this->paletteMask);
