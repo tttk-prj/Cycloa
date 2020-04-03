@@ -16,6 +16,7 @@ public:
     screenHeight = 240
   };
   static const uint32_t nesPaletteARGB[64];
+  static const uint16_t nesPaletteRGB565[64];
 
   explicit VideoFairy() {}
 
