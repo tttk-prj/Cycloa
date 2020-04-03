@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "spresense_port.h"
+
 Video::Video(VirtualMachine &vm, VideoFairy &videoFairy) :
     VM(vm),
     cartridge(NULL),
@@ -94,7 +96,8 @@ void Video::run(uint16_t clockDelta) {
         this->vramAddrRegister = (vramAddrRegister & 0x041F) | (vramAddrReloadRegister & 0x7BE0);
       }
     } else {
-      throw EmulatorException("Invalid scanline") << this->nowY;
+      // throw EmulatorException("Invalid scanline") << this->nowY;
+      EXCEPTION_THROW("Invalid scanline : %d\n HALT...",  this->nowY);
     }
   }
 }
@@ -169,7 +172,8 @@ inline void Video::buildSpriteLine() {
     const uint16_t off = slot.tileAddr | ((offY & 0x8) << 1) | (offY & 7);
     const uint8_t firstPlane = readVram(off);
     const uint8_t secondPlane = readVram(off + 8);
-    const uint16_t endX = std::min(screenWidth - slot.x, 8);
+    // const uint16_t endX = std::min(screenWidth - slot.x, 8);
+    const uint16_t endX = (screenWidth - slot.x > 8) ? 8 : screenWidth - slot.x;
     const uint8_t layerMask = slot.isForeground ? Video::FrontSpriteBit : Video::BackSpriteBit;
     if (slot.flipHorizontal) {
       for (size_t x = 0; x < endX; x++) {
@@ -326,6 +330,7 @@ uint8_t Video::readReg(uint16_t addr) {
     default:
       return 0;
 //			throw EmulatorException() << "Invalid addr: 0x" << std::hex << addr;
+		    EXCEPTION_THROW("Invalid addr: 0x%x\n", addr);
   }
 }
 
@@ -357,7 +362,8 @@ void Video::writeReg(uint16_t addr, uint8_t value) {
       writeVramDataRegister(value);
       break;
     default:
-      throw EmulatorException() << "Invalid addr: 0x" << std::hex << addr;
+      // throw EmulatorException() << "Invalid addr: 0x" << std::hex << addr;
+      EXCEPTION_THROW("Invaild addr : 0x%x\n HALT...", addr);
   }
 }
 
@@ -481,7 +487,8 @@ inline uint8_t Video::readVramExternal(uint16_t addr) const {
     case 0x3000:
       return this->cartridge->readNameTable(addr);
     default:
-      throw EmulatorException("Invalid vram access");
+      // throw EmulatorException("Invalid vram access");
+      EXCEPTION_THROW("Invalid vram access");
   }
 }
 
@@ -500,7 +507,8 @@ inline void Video::writeVramExternal(uint16_t addr, uint8_t value) {
       this->cartridge->writeNameTable(addr, value);
       break;
     default:
-      throw EmulatorException("Invalid vram access");
+      // throw EmulatorException("Invalid vram access");
+      EXCEPTION_THROW("Invalid vram access");
   }
 }
 

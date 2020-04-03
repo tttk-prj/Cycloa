@@ -22,6 +22,7 @@ int main(int argc, char **argv) {
     //
     SDL_Init(SDL_INIT_GAMECONTROLLER | SDL_INIT_VIDEO | SDL_INIT_AUDIO);
     SDLVideoFairy videoFairy("Cycloa");
+    // SDLVideoFairy videoFairy("Cycloa", 256, 240);
     SDLAudioFairy audioFairy;
     SDLGamepadInfo info;
     SDLGamepadFairy player1(info);

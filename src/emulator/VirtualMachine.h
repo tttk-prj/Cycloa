@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cstddef>
+// #include <cstddef>
 #include <iostream>
 #include <stdint.h>
 #include <string.h>
@@ -8,6 +8,8 @@
 #include "fairy/VideoFairy.h"
 #include "fairy/AudioFairy.h"
 #include "fairy/GamepadFairy.h"
+
+#include "spresense_port.h"
 
 class VirtualMachine;
 
@@ -18,7 +20,7 @@ public:
   };
 
   static Cartridge*
-  loadCartridge(VirtualMachine &vm, std::vector<uint8_t> data, std::string const& name = "MEMORY");
+  loadCartridge(VirtualMachine &vm, std::vector<uint8_t> data, std::string const & name = "MEMORY");
 
 public:
   explicit Cartridge(VirtualMachine &vm, const NesFile *nesFile = 0);
@@ -594,9 +596,9 @@ public:
   void sendVBlank(); //from video
   void sendHardReset(); //from user to all subsystems.
   void sendReset(); //from user to all subsystems.
-  void loadCartridge(std::string const& filename);
+  void loadCartridge(std::string const &filename);
 
-  void loadCartridge(std::vector<uint8_t> data, const std::string &name = "MEMORY"); //from user
+  void loadCartridge(std::vector<uint8_t> data, std::string const &name = "MEMORY"); //from user
   inline void consumeCpuClock(uint32_t clock) {
     consumeClock(clock * CPU_CLOCK_FACTOR);
   }
@@ -617,7 +619,8 @@ public:
         } else if (addr == 0x4017) {
           return ioPort.readInputReg2();
         } else if (addr < 0x4018) {
-          throw EmulatorException("[FIXME] Invalid addr: 0x") << std::hex << addr;
+          // throw EmulatorException("[FIXME] Invalid addr: 0x") << std::hex << addr;
+          EXCEPTION_THROW("[FIXME] Invalid addr: 0x%x\n", addr);
         } else {
           return cartridge->readRegisterArea(addr);
         }
@@ -630,7 +633,8 @@ public:
       case 0xE000:
         return cartridge->readBankHigh(addr);
       default:
-        throw EmulatorException("[FIXME] Invalid addr: 0x") << std::hex << addr;
+        // throw EmulatorException("[FIXME] Invalid addr: 0x") << std::hex << addr;
+        EXCEPTION_THROW("[FIXME] Invalid addr: 0x%x\n", addr);
     }
   }
 
@@ -666,7 +670,8 @@ public:
         cartridge->writeBankHigh(addr, value);
         break;
       default:
-        throw EmulatorException("[FIXME] Invalid addr: 0x") << std::hex << addr;
+        // throw EmulatorException("[FIXME] Invalid addr: 0x") << std::hex << addr;
+        EXCEPTION_THROW("[FIXME] Invalid addr: 0x%x\n", addr);
     }
   }
 

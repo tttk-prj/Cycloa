@@ -1,6 +1,9 @@
 #include <cstddef>
 #include <stdio.h>
-#include <filesystem>
+#include <unistd.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+// #include <filesystem>
 #include "exception/EmulatorException.h"
 #include "VirtualMachine.h"
 
@@ -107,19 +110,24 @@ void VirtualMachine::sendReset() {
 namespace {
 
 std::vector<uint8_t> readAllFromFile(std::string const &fileName) noexcept(false) {
-  std::uintmax_t const fileSize = std::filesystem::file_size(fileName);
+  struct stat ss;
+  // std::uintmax_t const fileSize = std::filesystem::file_size(fileName);
+  stat(fileName.c_str(), &ss);
+  int fileSize = ss.st_size;
   FILE *const file = fopen(fileName.c_str(), "rb");
   if (!file) {
-    std::error_code err = std::make_error_code(static_cast<std::errc>(errno));
-    throw std::filesystem::filesystem_error("Error to open file", fileName, err);
+    // std::error_code err = std::make_error_code(static_cast<std::errc>(errno));
+    // throw std::filesystem::filesystem_error("Error to open file", fileName, err);
+    EXCEPTION_THROW("Error to open file %s : (%d)\n", fileName.c_str(), errno);
   }
   std::vector<uint8_t> dat;
   dat.resize(fileSize);
   size_t readed = fread(dat.data(), 1, fileSize, file);
   if (readed < fileSize) {
-    std::error_code err = std::make_error_code(static_cast<std::errc>(errno));
+    // std::error_code err = std::make_error_code(static_cast<std::errc>(errno));
     fclose(file);
-    throw std::filesystem::filesystem_error("Error to read all contents from the file", fileName, err);
+    // throw std::filesystem::filesystem_error("Error to read all contents from the file", fileName, err);
+    EXCEPTION_THROW("Error to read all contents from the file %s : (%d)\n", fileName.c_str(), errno);
   }
   fclose(file);
   return std::move(dat);

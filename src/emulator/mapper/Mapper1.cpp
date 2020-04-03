@@ -1,5 +1,7 @@
 #include "Mapper1.h"
 
+#include "../spresense_port.h"
+
 Mapper1::Mapper1(VirtualMachine &vm, const NesFile *nesFile) :
     Cartridge(vm, nesFile),
     is512krom(nesFile->getPrgPageCnt() == 32),
@@ -75,7 +77,8 @@ void Mapper1::writeBankHigh(uint16_t addr, uint8_t val) {
         prgBank = reg & 15;
         break;
       default:
-        throw EmulatorException("[Mapper1] FIXME BUG!!");
+        // throw EmulatorException("[Mapper1] FIXME BUG!!");
+        EXCEPTION_THROW("[Mapper1] FIXME BUG!!");
     }
     updateBank();
     regCnt = 0;
@@ -116,7 +119,8 @@ void Mapper1::writeBankLow(uint16_t addr, uint8_t val) {
         this->lowChrBank = reg & 31;
         break;
       default:
-        throw EmulatorException("[Mapper1] FIXME BUG!!");
+        // throw EmulatorException("[Mapper1] FIXME BUG!!");
+        EXCEPTION_THROW("[Mapper1] FIXME BUG!!");
     }
     updateBank();
     regCnt = 0;

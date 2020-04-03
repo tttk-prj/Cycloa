@@ -11,6 +11,8 @@
 #include <string>
 #include <sstream>
 
+#include "spresense_port.h"
+
 //ダミー実装
 Cartridge::Cartridge(VirtualMachine &vm, const NesFile *nesFile) :
     nesFile(nesFile),
@@ -19,7 +21,7 @@ Cartridge::Cartridge(VirtualMachine &vm, const NesFile *nesFile) :
     mirrorType(nesFile->getMirrorType()),
     internalVram(NULL) {
   if (nesFile == NULL) {
-    throw EmulatorException("NES FILE CAN'T BE NULL!");
+    EXCEPTION_THROW("NES FILE CAN'T BE NULL!");
   }
 }
 
@@ -117,7 +119,8 @@ void Cartridge::changeMirrorType(NesFile::MirrorType mirrorType) {
       this->vramMirroring[3] = &internalVram[0x400];
       break;
     default:
-      throw EmulatorException("Invalid mirroring type!");
+      // throw EmulatorException("Invalid mirroring type!");
+      EXCEPTION_THROW("Invalid mirroring type!");
   }
 }
 
@@ -132,7 +135,7 @@ void Cartridge::releaseIRQ() {
 Cartridge *
 Cartridge::loadCartridge(VirtualMachine &vm, std::vector<uint8_t> data, std::string const& name) {
   NesFile *nesFile = nullptr;
-  try {
+  // try {
     nesFile = new NesFile(std::move(data), name);
     const uint8_t mapperNo = nesFile->getMapperNo();
     switch (mapperNo) {
@@ -154,14 +157,19 @@ Cartridge::loadCartridge(VirtualMachine &vm, std::vector<uint8_t> data, std::str
         return new Mapper25(vm, nesFile);
       default: {
         const uint32_t mapperNo32 = static_cast<uint32_t>(mapperNo);
-        throw EmulatorException("Not Supported Mapper: ") << mapperNo32 << "!";
+        // throw EmulatorException("Not Supported Mapper: ") << mapperNo32 << "!";
+        EXCEPTION_THROW("Not Supported Mapper: %d !\n", mapperNo32);
       }
     }
+/*
   } catch (...) {
     if(nesFile) {
       delete nesFile;
     }
-    throw;
+    // throw;
+    EXCEPTION_THROW(" ");
   }
+*/
+
   return NULL;
 }
