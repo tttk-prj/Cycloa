@@ -16,3 +16,12 @@ The JavaScript version of Cycloa is available:
 # License
 
 Cycloa is licensed under GPL v3 or later.
+
+# Cycloa on Spresense
+
+This repository is a clone of the original Cycloa, with modifications to run Cycloa on Spresense.
+The repository and build method of Spresense are described [here](https://github.com/tttk-prj/spresense/blob/master/examples/nes/README.md).
+
+このリポジトリはCycloaをSpresense上で動かすための修正を加えるために、オリジナルのCycloaをフォークしたものです。
+Spresense側のリポジトリとビルド方法などは、[こちら](https://github.com/tttk-prj/spresense/blob/master/examples/nes/README.md)に記載しています。
+
